@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class AppRouter {
   static const String initialRoute = '/';
 
-  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+   Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments ;
     switch (settings.name) {
       case Routes.onbordingScreen:
