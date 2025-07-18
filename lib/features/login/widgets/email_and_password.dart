@@ -26,11 +26,12 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   @override
   void initState() {
     super.initState();
-    passwordController = context.read<LoginCubit>().passwordController;
+   
     setupPasswordControllerListener();
   }
 
   void setupPasswordControllerListener() {
+     passwordController = context.read<LoginCubit>().passwordController;
     passwordController.addListener(() {
       setState(() {
         hasLowercase = AppRegex.hasLowerCase(passwordController.text);
