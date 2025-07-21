@@ -27,7 +27,7 @@
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.4.4'
+          ruby-version: ruby -v
           bundler-cache: true
           working-directory: android
       - name: Build and Distribute App
