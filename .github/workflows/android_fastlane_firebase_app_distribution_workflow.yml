@@ -8,7 +8,7 @@
 
  jobs:
    distributed_to_firebase:
-    runs-on: ubuntu latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout my repo
         uses: actions/checkout@v4
