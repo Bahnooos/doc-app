@@ -1,4 +1,7 @@
+import 'package:doctor_app/core/helpers/constants.dart';
+import 'package:doctor_app/core/helpers/shared_pref_helper.dart';
 import 'package:doctor_app/core/networking/api_result.dart';
+import 'package:doctor_app/core/networking/dio_factory.dart';
 import 'package:doctor_app/features/login/data/models/login_request_body.dart';
 import 'package:doctor_app/features/login/data/repos/login_repo.dart';
 import 'package:doctor_app/features/login/logic/cubit/login_state.dart';
@@ -21,11 +24,19 @@ class LoginCubit extends Cubit<LoginState> {
       ),
     );
     response.when(
-        success: (data) => emit(LoginState.success(data)),
+        success: (data) async {
+          await saveUserToken(data.userData?.token);
+          emit(LoginState.success(data));
+        },
         failure: (failure) => emit(
               LoginState.failure(
                 error: failure.apiErrorModel.message ?? ' ',
               ),
             ));
+  }
+
+  Future<void> saveUserToken(String? token) async {
+    SharedPrefHelper.setData(key: Constants.userToken, value: token);
+    DioFactory.sendTokenAfterLoggedIn(token);
   }
 }
