@@ -29,36 +29,25 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.8
+  dio: ^5.8.0+1
+  easy_localization: ^3.0.7+1
+  firebase_core: ^3.15.1
   flutter:
     sdk: flutter
-  # state management  
   flutter_bloc: ^9.1.0
-  # Code generation used with cubit & retrofit
+  flutter_native_splash: ^2.4.4
+  flutter_screenutil: ^5.9.3
+  flutter_secure_storage: ^9.2.4
+  flutter_svg: ^2.0.7
   freezed: ^3.1.0
-  # Annotations for the freezed code-generator. This package does nothing without freezed too.
   freezed_annotation: ^3.1.0
-  # for dependency injection
   get_it: ^8.0.3
-  # Automatically generate code for converting to and from JSON by annotating Dart classes.
-  json_serializable: ^6.9.4
-  # annotations for json_serializable code generator
+  intl: ^0.20.2
   json_annotation: ^4.9.0
-  # Networking
-  dio: ^5.8.0+1
+  json_serializable: ^6.9.4
+  pretty_dio_logger: ^1.4.0
   retrofit: ^4.4.2
   retrofit_generator: ^9.1.9
-  pretty_dio_logger: ^1.4.0
-  # localization
-  intl: ^0.20.2
-  easy_localization: ^3.0.7+1
-  # for splash screen
-  flutter_native_splash: ^2.4.4
-  # for image svg
-  flutter_svg: ^2.0.7
-  # for responsive design
-  flutter_screenutil: ^5.9.3
-  firebase_core: ^3.15.1
-
   shared_preferences: ^2.5.3
 
 dev_dependencies:

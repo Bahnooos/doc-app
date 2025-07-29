@@ -1,12 +1,13 @@
 // ignore_for_file: type_literal_in_constant_pattern
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefHelper {
-
-    // private constructor as I don't want to allow creating an instance of this class itself.
+  // private constructor as I don't want to allow creating an instance of this class itself.
   SharedPrefHelper._();
+
   /// remove all values and keys from shared preferences
   static void clearAllData() async {
     debugPrint('SharedPrefHelper : all data has been cleared');
@@ -39,7 +40,7 @@ class SharedPrefHelper {
         await prefs.setBool(key, value);
         break;
       default:
-      return  null;
+        return null;
     }
   }
 
@@ -69,5 +70,20 @@ class SharedPrefHelper {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     debugPrint('SharedPrefHelper : getBool with key : $key');
     return prefs.getBool(key) ?? false;
+  }
+
+  /// set secure A [value] with a [key]
+  static void setSecureData({required String key, required String value}) async {
+    const flutterSecureStorage = FlutterSecureStorage();
+    debugPrint('the key is $key and the value is $value');
+   await flutterSecureStorage.write(key: key, value: value);
+  }
+
+  static Future<String> getSecureData({
+    required String key,
+  }) async {
+    const flutterSecureStorage = FlutterSecureStorage();
+    debugPrint('the key is $key');
+    return await flutterSecureStorage.read(key: key) ?? '';
   }
 }
