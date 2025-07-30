@@ -24,17 +24,17 @@ class HomeCubit extends Cubit<HomeState> {
     });
   }
 
-  void getFilterDoctorsById({required int specializationId}) {
+  void getFilterDoctorsById({required int? specializationId}) {
     final doctors = getDoctorsListBySpecializationId(specializationId);
     if (!doctors.isNullAndEmpty()) {
       emit(HomeState.doctorsSuccess(doctors));
     } else {
-      emit(HomeState.doctorsError(ErrorHandler.handle('error')));
+      emit(HomeState.doctorsError(ApiErrorHandler.handle('error')));
     }
   }
 
 
-  List<Doctors?>? getDoctorsListBySpecializationId(int index) {
+  List<Doctors?>? getDoctorsListBySpecializationId(index) {
     return specializationsDataList
         ?.firstWhere((specializationId) => specializationId?.id == index)
         ?.doctorsList;

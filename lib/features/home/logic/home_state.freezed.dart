@@ -177,9 +177,9 @@ extension HomeStatePatterns on HomeState {
     TResult Function()? loading,
     TResult Function(List<SpecializationsData?>? specializationDataList)?
         specializationsSuccess,
-    TResult Function(ErrorHandler errorHandler)? specializationsError,
+    TResult Function(ApiErrorModel apiErrorModel)? specializationsError,
     TResult Function(List<Doctors?>? doctorsList)? doctorsSuccess,
-    TResult Function(ErrorHandler errorHandler)? doctorsError,
+    TResult Function(ApiErrorModel apiErrorModel)? doctorsError,
     required TResult orElse(),
   }) {
     final _that = this;
@@ -191,11 +191,11 @@ extension HomeStatePatterns on HomeState {
       case SpecializationsSuccess() when specializationsSuccess != null:
         return specializationsSuccess(_that.specializationDataList);
       case SpecializationsError() when specializationsError != null:
-        return specializationsError(_that.errorHandler);
+        return specializationsError(_that.apiErrorModel);
       case DoctorsSuccess() when doctorsSuccess != null:
         return doctorsSuccess(_that.doctorsList);
       case DoctorsError() when doctorsError != null:
-        return doctorsError(_that.errorHandler);
+        return doctorsError(_that.apiErrorModel);
       case _:
         return orElse();
     }
@@ -221,9 +221,9 @@ extension HomeStatePatterns on HomeState {
     required TResult Function(
             List<SpecializationsData?>? specializationDataList)
         specializationsSuccess,
-    required TResult Function(ErrorHandler errorHandler) specializationsError,
+    required TResult Function(ApiErrorModel apiErrorModel) specializationsError,
     required TResult Function(List<Doctors?>? doctorsList) doctorsSuccess,
-    required TResult Function(ErrorHandler errorHandler) doctorsError,
+    required TResult Function(ApiErrorModel apiErrorModel) doctorsError,
   }) {
     final _that = this;
     switch (_that) {
@@ -234,11 +234,11 @@ extension HomeStatePatterns on HomeState {
       case SpecializationsSuccess():
         return specializationsSuccess(_that.specializationDataList);
       case SpecializationsError():
-        return specializationsError(_that.errorHandler);
+        return specializationsError(_that.apiErrorModel);
       case DoctorsSuccess():
         return doctorsSuccess(_that.doctorsList);
       case DoctorsError():
-        return doctorsError(_that.errorHandler);
+        return doctorsError(_that.apiErrorModel);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -262,9 +262,9 @@ extension HomeStatePatterns on HomeState {
     TResult? Function()? loading,
     TResult? Function(List<SpecializationsData?>? specializationDataList)?
         specializationsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? specializationsError,
+    TResult? Function(ApiErrorModel apiErrorModel)? specializationsError,
     TResult? Function(List<Doctors?>? doctorsList)? doctorsSuccess,
-    TResult? Function(ErrorHandler errorHandler)? doctorsError,
+    TResult? Function(ApiErrorModel apiErrorModel)? doctorsError,
   }) {
     final _that = this;
     switch (_that) {
@@ -275,11 +275,11 @@ extension HomeStatePatterns on HomeState {
       case SpecializationsSuccess() when specializationsSuccess != null:
         return specializationsSuccess(_that.specializationDataList);
       case SpecializationsError() when specializationsError != null:
-        return specializationsError(_that.errorHandler);
+        return specializationsError(_that.apiErrorModel);
       case DoctorsSuccess() when doctorsSuccess != null:
         return doctorsSuccess(_that.doctorsList);
       case DoctorsError() when doctorsError != null:
-        return doctorsError(_that.errorHandler);
+        return doctorsError(_that.apiErrorModel);
       case _:
         return null;
     }
@@ -406,9 +406,9 @@ class _$SpecializationsSuccessCopyWithImpl<$Res>
 /// @nodoc
 
 class SpecializationsError implements HomeState {
-  const SpecializationsError(this.errorHandler);
+  const SpecializationsError(this.apiErrorModel);
 
-  final ErrorHandler errorHandler;
+  final ApiErrorModel apiErrorModel;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -423,16 +423,16 @@ class SpecializationsError implements HomeState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is SpecializationsError &&
-            (identical(other.errorHandler, errorHandler) ||
-                other.errorHandler == errorHandler));
+            (identical(other.apiErrorModel, apiErrorModel) ||
+                other.apiErrorModel == apiErrorModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorHandler);
+  int get hashCode => Object.hash(runtimeType, apiErrorModel);
 
   @override
   String toString() {
-    return 'HomeState.specializationsError(errorHandler: $errorHandler)';
+    return 'HomeState.specializationsError(apiErrorModel: $apiErrorModel)';
   }
 }
 
@@ -443,7 +443,7 @@ abstract mixin class $SpecializationsErrorCopyWith<$Res>
           $Res Function(SpecializationsError) _then) =
       _$SpecializationsErrorCopyWithImpl;
   @useResult
-  $Res call({ErrorHandler errorHandler});
+  $Res call({ApiErrorModel apiErrorModel});
 }
 
 /// @nodoc
@@ -458,13 +458,13 @@ class _$SpecializationsErrorCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? errorHandler = null,
+    Object? apiErrorModel = null,
   }) {
     return _then(SpecializationsError(
-      null == errorHandler
-          ? _self.errorHandler
-          : errorHandler // ignore: cast_nullable_to_non_nullable
-              as ErrorHandler,
+      null == apiErrorModel
+          ? _self.apiErrorModel
+          : apiErrorModel // ignore: cast_nullable_to_non_nullable
+              as ApiErrorModel,
     ));
   }
 }
@@ -546,9 +546,9 @@ class _$DoctorsSuccessCopyWithImpl<$Res>
 /// @nodoc
 
 class DoctorsError implements HomeState {
-  const DoctorsError(this.errorHandler);
+  const DoctorsError(this.apiErrorModel);
 
-  final ErrorHandler errorHandler;
+  final ApiErrorModel apiErrorModel;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -562,16 +562,16 @@ class DoctorsError implements HomeState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is DoctorsError &&
-            (identical(other.errorHandler, errorHandler) ||
-                other.errorHandler == errorHandler));
+            (identical(other.apiErrorModel, apiErrorModel) ||
+                other.apiErrorModel == apiErrorModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorHandler);
+  int get hashCode => Object.hash(runtimeType, apiErrorModel);
 
   @override
   String toString() {
-    return 'HomeState.doctorsError(errorHandler: $errorHandler)';
+    return 'HomeState.doctorsError(apiErrorModel: $apiErrorModel)';
   }
 }
 
@@ -582,7 +582,7 @@ abstract mixin class $DoctorsErrorCopyWith<$Res>
           DoctorsError value, $Res Function(DoctorsError) _then) =
       _$DoctorsErrorCopyWithImpl;
   @useResult
-  $Res call({ErrorHandler errorHandler});
+  $Res call({ApiErrorModel apiErrorModel});
 }
 
 /// @nodoc
@@ -596,13 +596,13 @@ class _$DoctorsErrorCopyWithImpl<$Res> implements $DoctorsErrorCopyWith<$Res> {
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? errorHandler = null,
+    Object? apiErrorModel = null,
   }) {
     return _then(DoctorsError(
-      null == errorHandler
-          ? _self.errorHandler
-          : errorHandler // ignore: cast_nullable_to_non_nullable
-              as ErrorHandler,
+      null == apiErrorModel
+          ? _self.apiErrorModel
+          : apiErrorModel // ignore: cast_nullable_to_non_nullable
+              as ApiErrorModel,
     ));
   }
 }

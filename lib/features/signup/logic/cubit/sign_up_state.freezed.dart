@@ -157,7 +157,7 @@ extension SignUpStatePatterns<T> on SignUpState<T> {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(T data)? success,
-    TResult Function(String failure)? error,
+    TResult Function(ApiErrorModel apiErrorModel)? error,
     required TResult orElse(),
   }) {
     final _that = this;
@@ -169,7 +169,7 @@ extension SignUpStatePatterns<T> on SignUpState<T> {
       case Success() when success != null:
         return success(_that.data);
       case Error() when error != null:
-        return error(_that.failure);
+        return error(_that.apiErrorModel);
       case _:
         return orElse();
     }
@@ -193,7 +193,7 @@ extension SignUpStatePatterns<T> on SignUpState<T> {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(T data) success,
-    required TResult Function(String failure) error,
+    required TResult Function(ApiErrorModel apiErrorModel) error,
   }) {
     final _that = this;
     switch (_that) {
@@ -204,7 +204,7 @@ extension SignUpStatePatterns<T> on SignUpState<T> {
       case Success():
         return success(_that.data);
       case Error():
-        return error(_that.failure);
+        return error(_that.apiErrorModel);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -227,7 +227,7 @@ extension SignUpStatePatterns<T> on SignUpState<T> {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(T data)? success,
-    TResult? Function(String failure)? error,
+    TResult? Function(ApiErrorModel apiErrorModel)? error,
   }) {
     final _that = this;
     switch (_that) {
@@ -238,7 +238,7 @@ extension SignUpStatePatterns<T> on SignUpState<T> {
       case Success() when success != null:
         return success(_that.data);
       case Error() when error != null:
-        return error(_that.failure);
+        return error(_that.apiErrorModel);
       case _:
         return null;
     }
@@ -351,9 +351,9 @@ class _$SuccessCopyWithImpl<T, $Res> implements $SuccessCopyWith<T, $Res> {
 /// @nodoc
 
 class Error<T> implements SignUpState<T> {
-  const Error(this.failure);
+  const Error(this.apiErrorModel);
 
-  final String failure;
+  final ApiErrorModel apiErrorModel;
 
   /// Create a copy of SignUpState
   /// with the given fields replaced by the non-null parameter values.
@@ -367,15 +367,16 @@ class Error<T> implements SignUpState<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Error<T> &&
-            (identical(other.failure, failure) || other.failure == failure));
+            (identical(other.apiErrorModel, apiErrorModel) ||
+                other.apiErrorModel == apiErrorModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, failure);
+  int get hashCode => Object.hash(runtimeType, apiErrorModel);
 
   @override
   String toString() {
-    return 'SignUpState<$T>.error(failure: $failure)';
+    return 'SignUpState<$T>.error(apiErrorModel: $apiErrorModel)';
   }
 }
 
@@ -385,7 +386,7 @@ abstract mixin class $ErrorCopyWith<T, $Res>
   factory $ErrorCopyWith(Error<T> value, $Res Function(Error<T>) _then) =
       _$ErrorCopyWithImpl;
   @useResult
-  $Res call({String failure});
+  $Res call({ApiErrorModel apiErrorModel});
 }
 
 /// @nodoc
@@ -399,13 +400,13 @@ class _$ErrorCopyWithImpl<T, $Res> implements $ErrorCopyWith<T, $Res> {
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? failure = null,
+    Object? apiErrorModel = null,
   }) {
     return _then(Error<T>(
-      null == failure
-          ? _self.failure
-          : failure // ignore: cast_nullable_to_non_nullable
-              as String,
+      null == apiErrorModel
+          ? _self.apiErrorModel
+          : apiErrorModel // ignore: cast_nullable_to_non_nullable
+              as ApiErrorModel,
     ));
   }
 }

@@ -137,7 +137,7 @@ extension ApiResultPatterns<T> on ApiResult<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T data)? success,
-    TResult Function(ErrorHandler errorHandler)? failure,
+    TResult Function(ApiErrorModel apiErrorModel)? failure,
     required TResult orElse(),
   }) {
     final _that = this;
@@ -145,7 +145,7 @@ extension ApiResultPatterns<T> on ApiResult<T> {
       case Success() when success != null:
         return success(_that.data);
       case Failure() when failure != null:
-        return failure(_that.errorHandler);
+        return failure(_that.apiErrorModel);
       case _:
         return orElse();
     }
@@ -167,14 +167,14 @@ extension ApiResultPatterns<T> on ApiResult<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T data) success,
-    required TResult Function(ErrorHandler errorHandler) failure,
+    required TResult Function(ApiErrorModel apiErrorModel) failure,
   }) {
     final _that = this;
     switch (_that) {
       case Success():
         return success(_that.data);
       case Failure():
-        return failure(_that.errorHandler);
+        return failure(_that.apiErrorModel);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -195,14 +195,14 @@ extension ApiResultPatterns<T> on ApiResult<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(T data)? success,
-    TResult? Function(ErrorHandler errorHandler)? failure,
+    TResult? Function(ApiErrorModel apiErrorModel)? failure,
   }) {
     final _that = this;
     switch (_that) {
       case Success() when success != null:
         return success(_that.data);
       case Failure() when failure != null:
-        return failure(_that.errorHandler);
+        return failure(_that.apiErrorModel);
       case _:
         return null;
     }
@@ -275,9 +275,9 @@ class _$SuccessCopyWithImpl<T, $Res> implements $SuccessCopyWith<T, $Res> {
 /// @nodoc
 
 class Failure<T> implements ApiResult<T> {
-  const Failure(this.errorHandler);
+  const Failure(this.apiErrorModel);
 
-  final ErrorHandler errorHandler;
+  final ApiErrorModel apiErrorModel;
 
   /// Create a copy of ApiResult
   /// with the given fields replaced by the non-null parameter values.
@@ -291,16 +291,16 @@ class Failure<T> implements ApiResult<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Failure<T> &&
-            (identical(other.errorHandler, errorHandler) ||
-                other.errorHandler == errorHandler));
+            (identical(other.apiErrorModel, apiErrorModel) ||
+                other.apiErrorModel == apiErrorModel));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, errorHandler);
+  int get hashCode => Object.hash(runtimeType, apiErrorModel);
 
   @override
   String toString() {
-    return 'ApiResult<$T>.failure(errorHandler: $errorHandler)';
+    return 'ApiResult<$T>.failure(apiErrorModel: $apiErrorModel)';
   }
 }
 
@@ -310,7 +310,7 @@ abstract mixin class $FailureCopyWith<T, $Res>
   factory $FailureCopyWith(Failure<T> value, $Res Function(Failure<T>) _then) =
       _$FailureCopyWithImpl;
   @useResult
-  $Res call({ErrorHandler errorHandler});
+  $Res call({ApiErrorModel apiErrorModel});
 }
 
 /// @nodoc
@@ -324,13 +324,13 @@ class _$FailureCopyWithImpl<T, $Res> implements $FailureCopyWith<T, $Res> {
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? errorHandler = null,
+    Object? apiErrorModel = null,
   }) {
     return _then(Failure<T>(
-      null == errorHandler
-          ? _self.errorHandler
-          : errorHandler // ignore: cast_nullable_to_non_nullable
-              as ErrorHandler,
+      null == apiErrorModel
+          ? _self.apiErrorModel
+          : apiErrorModel // ignore: cast_nullable_to_non_nullable
+              as ApiErrorModel,
     ));
   }
 }
